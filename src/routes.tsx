@@ -4,8 +4,8 @@ import Categories from './pages/Perfil'
 
 const Rotas = () => (
   <Routes>
-    <Route path="/home" element={<Home />} />
-    <Route path="/categories" element={<Categories />} />
+    <Route path="/" element={<Home />} />
+    <Route path="/categories/:id" element={<Categories />} />
   </Routes>
 )
 

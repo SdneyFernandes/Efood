@@ -3,13 +3,13 @@ import { cores } from '../../styles'
 
 export const FooterContainer = styled.footer`
   background-color: ${cores.Amarelo};
-  width: 1366px;
+  width: 1349px;
   height: 298px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 70px;
+  padding-top: 50px;
 `
 
 export const Icons = styled.div`
@@ -22,7 +22,7 @@ export const Icon = styled.img`
   padding-left: 5px;
 `
 
-export const Fdescricao = styled.p`
+export const FooterDescription = styled.p`
   color: ${cores.Rosa};
   font-size: 10px;
   width: 480px;

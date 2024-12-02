@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import fundo from '../../assets/images/fundo.png'
 import { cores } from '../../styles'
 
-type HeaderProps = {
+export type HeaderProps = {
   layout: 'vertical' | 'horizontal'
 }
 
@@ -17,13 +17,18 @@ export const HeaderBar = styled.header<HeaderProps>`
   justify-content: ${(props) =>
     props.layout === 'vertical' ? 'center' : 'space-around'};
   text-align: center;
+
+  p {
+    font-size: 18px;
+    font-weight: 900;
+    color: ${cores.Rosa};
+  }
+
+  .link {
+    text-decoration: none;
+  }
 `
 
-export const Paragraph = styled.p`
-  font-size: 18px;
-  font-weight: 900;
-  color: ${cores.Rosa};
-`
 export const Titulo = styled.h2`
   color: ${cores.Rosa};
   font-size: 36px;

@@ -1,92 +1,124 @@
-import image3 from '../../assets/images/image3.png'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import Hero from '../../components/Hero'
-import ProductsList from '../../components/ProductsList'
-import Comida from '../../models/Comida'
+import ItemList from '../../components/ItemList'
+import Item from '../../models/Item'
+import Modal from '../../components/Modal'
 
-const Cardapio: Comida[] = [
-  {
-    id: 1,
-    category: 'Japonesa',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: image3,
-    destaque: 'Destaque da semana',
-    button: 'Adicionar ao carrinho',
-    nota: '4.9',
-    infos: '',
-  },
-  {
-    id: 2,
-    category: 'Bebidas',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: image3,
-    destaque: 'Italiana',
-    button: 'Adicionar ao carrinho',
-    nota: '4.9',
-    infos: '',
-  },
-  {
-    id: 3,
-    category: 'Bebidas',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: image3,
-    destaque: 'Italiana',
-    button: 'Adicionar ao carrinho',
-    nota: '4.9',
-    infos: '',
-  },
-  {
-    id: 4,
-    category: 'Bebidas',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza MArguerita',
-    image: image3,
-    destaque: 'Italiana',
-    button: 'Adicionar ao carrinho',
-    nota: '4.9',
-    infos: '',
-  },
-  {
-    id: 5,
-    category: 'Bebidas',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: image3,
-    destaque: 'Italiana',
-    button: 'Adicionar ao carrinho',
-    nota: '4.9',
-    infos: '',
-  },
-  {
-    id: 6,
-    category: 'Bebidas',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    title: 'Pizza Marguerita',
-    image: image3,
-    destaque: 'Italiana',
-    button: 'Adicionar ao carrinho',
-    nota: '4.9',
-    infos: '',
-  },
-]
+import Cart from '../../components/Cart' // Certifique-se de importar o Cart
 
-const Categories = () => (
-  <div>
-    <Header variant="categories" />
-    <Hero />
-    <ProductsList comidas={Cardapio} columns={3} variant="categories" />
-    <Footer />
-  </div>
-)
+const Categories = () => {
+  const { id } = useParams<{ id: string }>()
+  const [menuItems, setMenuItems] = useState<Item[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [restaurantInfo, setRestaurantInfo] = useState({
+    nome: '',
+    tipo: '',
+    capa: '',
+  })
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null)
+  const [isModalOpen, setModalOpen] = useState<boolean>(false)
+  const [isCartOpen, setCartOpen] = useState<boolean>(false) // Estado do carrinho
+
+  const fetchMenu = async () => {
+    try {
+      const response = await axios.get(
+        'https://fake-api-tau.vercel.app/api/efood/restaurantes'
+      )
+      const data = response.data
+
+      const restaurant = data.find(
+        (restaurante: any) => restaurante.id === parseInt(id || '0')
+      )
+
+      if (restaurant) {
+        setRestaurantInfo({
+          nome: restaurant.titulo,
+          tipo: restaurant.tipo,
+          capa: restaurant.capa,
+        })
+
+        const formattedData = restaurant.cardapio.map(
+          (item: any) =>
+            new Item({
+              id: item.id,
+              titulo: item.nome,
+              descricao: item.descricao,
+              capa: item.foto,
+              buttonText: 'Mais detalhes',
+              porcao: item.porcao,
+              preco: item.preco,
+            })
+        )
+        setMenuItems(formattedData)
+      }
+    } catch (error) {
+      console.error('Erro ao buscar os dados do cardápio:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleItemClick = (item: Item) => {
+    setSelectedItem(item)
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
+    setSelectedItem(null)
+  }
+
+  const toggleCart = () => {
+    setCartOpen(!isCartOpen) // Alterna o estado do carrinho
+  }
+
+  useEffect(() => {
+    fetchMenu()
+  }, [id])
+
+  return (
+    <div>
+      <Header variant="categories" onCartClick={toggleCart} />
+      <Hero
+        capa={restaurantInfo.capa}
+        titulo={restaurantInfo.nome}
+        tipo={restaurantInfo.tipo}
+      />
+      {loading ? (
+        <p className="loading">Carregando...</p>
+      ) : (
+        <ItemList
+          items={menuItems}
+          columns={3}
+          variant="categories"
+          onItemClick={handleItemClick}
+        />
+      )}
+      <Footer />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        data={
+          selectedItem
+            ? {
+                id: selectedItem.id,
+                capa: selectedItem.capa,
+                titulo: selectedItem.titulo,
+                descricao: selectedItem.descricao,
+                porcao: selectedItem.porcao || '',
+                preco: selectedItem.preco || 0,
+              }
+            : null
+        }
+      />
+      <Cart isOpen={isCartOpen} onClose={toggleCart} />{' '}
+      {/* Renderiza o carrinho */}
+    </div>
+  )
+}
 
 export default Categories

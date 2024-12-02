@@ -1,23 +1,21 @@
 import styled from 'styled-components'
 
-type ProductContainerProps = {
-  variant?: 'home' | 'categories'
-}
 type ListProps = {
   columns: number
   variant?: 'home' | 'categories'
 }
 
-export const ProductContainer = styled.main<ProductContainerProps>`
-  width: 1024px;
-  height: ${(props) => (props.variant === 'home' ? '1320px' : '810px')};
+export const ListContainer = styled.main<ListProps>`
+  width: 990px;
+  height: 100%;
   margin: 0 auto;
 `
 
 export const List = styled.ul<ListProps>`
   display: grid;
   grid-template-columns: repeat(${(props) => props.columns}, 1fr);
-  margin-top: ${(props) => (props.variant === 'home' ? '0px' : '60px')};
+  margin: 100px 0;
   column-gap: 30px;
   row-gap: 30px;
+  height: 100%;
 `

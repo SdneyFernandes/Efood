@@ -1,10 +1,17 @@
 import { HeroContainer } from './styles'
 
-const Hero = () => (
+interface HeroProps {
+  capa: string
+  titulo: string
+  tipo: string
+}
+
+const Hero: React.FC<HeroProps> = ({ capa, titulo, tipo }) => (
   <HeroContainer>
+    <img src={capa} alt="Imagem de fundo" className="hero-image" />
     <div>
-      <p>Italiana</p>
-      <p className="titulo">La Dolce Vita Tratoria</p>
+      <p>{tipo}</p>
+      <p className="titulo">{titulo}</p>
     </div>
   </HeroContainer>
 )

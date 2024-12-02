@@ -19,9 +19,12 @@ export const GlobalCss = createGlobalStyle`
 body {
 background-color: ${cores.RosaClaro}
 }
-`
 
-export const Container = styled.div`
-  max-width: 1366px;
-  height: 100%;
+.loading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #E66767;
+  text-align: center;
+}
+
 `

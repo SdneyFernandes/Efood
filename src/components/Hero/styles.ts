@@ -1,14 +1,21 @@
 import styled from 'styled-components'
-import image2 from '../../assets/images/image2.png'
 import { cores } from '../../styles'
 
 export const HeroContainer = styled.div`
   position: relative;
-  width: 1366px;
+  width: 100%;
   height: 280px;
-  background-image: url(${image2});
+  overflow: hidden;
   padding-top: 20px;
-  margin-bottom: 40px;
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
   div {
     position: absolute;
@@ -16,6 +23,7 @@ export const HeroContainer = styled.div`
     font-size: 32px;
     margin-left: 155px;
     font-weight: 100;
+    z-index: 1;
 
     .titulo {
       font-weight: 900;
