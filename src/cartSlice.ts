@@ -9,13 +9,20 @@ type CartItem = {
 
 type CartState = {
   items: CartItem[]
-  total: number // Adicione a propriedade total
+  total: number
 }
 
-const initialState: CartState = {
-  items: [],
-  total: 0, // Inicialize como zero
+const getInitialCartState = (): CartState => {
+  const savedCart = localStorage.getItem('cartState')
+  return savedCart
+    ? JSON.parse(savedCart)
+    : {
+        items: [],
+        total: 0,
+      }
 }
+
+const initialState: CartState = getInitialCartState()
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -23,14 +30,25 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action: PayloadAction<CartItem>) => {
       state.items.push(action.payload)
-      state.total = state.items.reduce((acc, item) => acc + item.preco, 0) // Recalcula o total
+      state.total = state.items.reduce((acc, item) => acc + item.preco, 0)
+      saveCartStateToLocalStorage(state)
     },
     removeItem: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((item) => item.id !== action.payload)
-      state.total = state.items.reduce((acc, item) => acc + item.preco, 0) // Recalcula o total
+      state.total = state.items.reduce((acc, item) => acc + item.preco, 0)
+      saveCartStateToLocalStorage(state)
+    },
+    setCartItems: (state, action: PayloadAction<CartItem[]>) => {
+      state.items = action.payload
+      state.total = state.items.reduce((acc, item) => acc + item.preco, 0)
+      saveCartStateToLocalStorage(state)
     },
   },
 })
 
-export const { addItem, removeItem } = cartSlice.actions
+const saveCartStateToLocalStorage = (state: CartState) => {
+  localStorage.setItem('cartState', JSON.stringify(state))
+}
+
+export const { addItem, removeItem, setCartItems } = cartSlice.actions
 export default cartSlice.reducer

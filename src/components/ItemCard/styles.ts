@@ -56,14 +56,11 @@ export const CardContainer = styled.div<ItemProps>`
   button {
     width: ${(props) => (props.variant === 'home' ? '82px' : '304px')};
     height: ${(props) => (props.variant === 'home' ? '24px' : '24px')};
-    text-decoration: none;
     font-size: ${(props) => (props.variant === 'home' ? '14px' : '14px')};
     background-color: ${(props) =>
       props.variant === 'home' ? cores.Rosa : cores.Amarelo};
     color: ${(props) =>
       props.variant === 'home' ? cores.RosaClaro : cores.Rosa};
-    border: none;
-    font-weight: 700;
     margin-top: ${(props) => (props.variant === 'home' ? '10px' : '65px')};
   }
 `

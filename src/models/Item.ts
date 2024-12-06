@@ -20,8 +20,8 @@ class Item {
   destacado?: string
   tipo?: string
   avaliacao?: string
-  porcao?: string // Nova propriedade
-  preco?: number // Nova propriedade
+  porcao?: string
+  preco?: number
 
   constructor({
     id,
@@ -43,8 +43,8 @@ class Item {
     this.destacado = destacado
     this.tipo = tipo
     this.avaliacao = avaliacao
-    this.porcao = porcao // Adicionando a propriedade porção
-    this.preco = preco // Adicionando a propriedade preço
+    this.porcao = porcao
+    this.preco = preco
   }
 }
 

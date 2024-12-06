@@ -57,11 +57,13 @@ const ItemCard = ({
         </div>
         <ItemDescription variant={variant}>{descricao}</ItemDescription>
         {variant === 'home' ? (
-          <button onClick={() => navigate(`/categories/${id}`)}>
+          <button className="btn" onClick={() => navigate(`/categories/${id}`)}>
             {buttonText}
           </button>
         ) : (
-          <button onClick={onClick}>{buttonText}</button>
+          <button className="btn" onClick={onClick}>
+            {buttonText}
+          </button>
         )}
       </CardContainer>
     </Card>

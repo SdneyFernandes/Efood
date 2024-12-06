@@ -8,7 +8,7 @@ import ItemList from '../../components/ItemList'
 import Item from '../../models/Item'
 import Modal from '../../components/Modal'
 
-import Cart from '../../components/Cart' // Certifique-se de importar o Cart
+import Cart from '../../components/Cart'
 
 const Categories = () => {
   const { id } = useParams<{ id: string }>()
@@ -21,7 +21,7 @@ const Categories = () => {
   })
   const [selectedItem, setSelectedItem] = useState<Item | null>(null)
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
-  const [isCartOpen, setCartOpen] = useState<boolean>(false) // Estado do carrinho
+  const [isCartOpen, setCartOpen] = useState<boolean>(false)
 
   const fetchMenu = async () => {
     try {
@@ -73,7 +73,7 @@ const Categories = () => {
   }
 
   const toggleCart = () => {
-    setCartOpen(!isCartOpen) // Alterna o estado do carrinho
+    setCartOpen(!isCartOpen)
   }
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const Categories = () => {
         tipo={restaurantInfo.tipo}
       />
       {loading ? (
-        <p className="loading">Carregando...</p>
+        <p className="isloading">Carregando...</p>
       ) : (
         <ItemList
           items={menuItems}
@@ -116,7 +116,6 @@ const Categories = () => {
         }
       />
       <Cart isOpen={isCartOpen} onClose={toggleCart} />{' '}
-      {/* Renderiza o carrinho */}
     </div>
   )
 }

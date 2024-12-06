@@ -46,7 +46,7 @@ const Home = () => {
     <div>
       <Header variant="home" />
       {loading ? (
-        <p className="loading">Carregando...</p>
+        <p className="isloading">Carregando...</p>
       ) : (
         <ItemList items={restaurants} columns={2} variant="home" />
       )}

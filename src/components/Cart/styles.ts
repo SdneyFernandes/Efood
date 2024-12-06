@@ -31,9 +31,10 @@ export const CartItem = styled.div`
   color: ${cores.Rosa};
 
   button {
-    background: ${cores.Amarelo};
+    background: none;
     border: none;
-    margin-left: 200px;
+    margin-left: 165px;
+    cursor: pointer;
   }
 
   .ItemCar {
@@ -61,20 +62,21 @@ export const CartTotal = styled.div`
   color: ${cores.Amarelo};
 
   span {
-    margin-left: 184px;
+    margin-left: 170px;
   }
+`
+export const Message = styled.div`
+  color: ${cores.Amarelo};
+  font-weight: bold;
+  border: 1px solid yellow;
+  padding: 5px 5px;
 `
 
 export const ContinueButton = styled.button`
   margin-top: 10px;
   width: 320px;
   height: 30px;
-  background: ${cores.Amarelo};
-  color: ${cores.Rosa};
-  border: none;
   border-radius: 2px;
-  cursor: pointer;
-  font-weight: bold;
 `
 
 export const TitleForm = styled.h3`
@@ -106,7 +108,9 @@ export const Form = styled.form`
     }
   }
 
-  .number {
+  .deliveryCEP,
+  .CartNumber,
+  .expiryMonth {
     displey: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -123,11 +127,11 @@ export const Form = styled.form`
       width: 70px;
     }
 
-    .mes {
+    .month {
       width: 140px;
     }
 
-    .ano {
+    .year {
       width: 150px;
     }
   }

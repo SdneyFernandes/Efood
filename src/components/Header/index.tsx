@@ -6,7 +6,7 @@ import { RootState } from '../../store'
 
 type HeaderProps = {
   variant: 'home' | 'categories'
-  onCartClick?: () => void // Prop para abrir o carrinho
+  onCartClick?: () => void
 }
 
 const Header = ({ variant, onCartClick }: HeaderProps) => {

@@ -20,11 +20,43 @@ body {
 background-color: ${cores.RosaClaro}
 }
 
-.loading {
+ .isloading{
+  width: 70px;
+  height: 70px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #E66767;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
   font-size: 24px;
   font-weight: bold;
   color: #E66767;
-  text-align: center;
+  margin-bottom: 150px;
+  margin-top: 150px;
+  margin-left: 625px;
+ }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(200deg);
+  }
 }
+
+.btn {
+  transition: all 0.9s ease;
+  border: none;
+  cursor: pointer;
+  color: ${cores.Rosa};
+  font-weight: bold;
+  background-color: ${cores.Amarelo};
+}
+.btn:hover {
+  transform: scale(1.1);
+}
+
+}
+
 
 `

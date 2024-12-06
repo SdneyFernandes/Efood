@@ -46,10 +46,17 @@ export const ModalDescription = styled.div`
 
   button {
     padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    color: ${cores.Rosa};
-    font-weight: bold;
-    background-color: ${cores.Amarelo};
   }
+`
+export const Notification = styled.div`
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: ${cores.Amarelo};
+  color: ${cores.Rosa};
+  font-weight: bold;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 `
