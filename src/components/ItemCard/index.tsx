@@ -7,8 +7,8 @@ import {
   ItemInfos,
   ItemRating,
   ItemTitle,
+  Tag,
 } from './styles'
-import Tag from '../Tag'
 
 type Props = {
   id: number

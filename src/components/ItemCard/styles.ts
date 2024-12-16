@@ -68,4 +68,11 @@ export const CardContainer = styled.div<ItemProps>`
 export const ItemRating = styled.p`
   color: ${cores.Rosa};
   font-weight: 900;
+  font-size: 18px;
+`
+export const Tag = styled.p`
+  background-color: ${cores.Rosa};
+  color: ${cores.RosaClaro};
+  font-size: 12px;
+  padding: 8px 16px;
 `

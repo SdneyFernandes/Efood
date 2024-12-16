@@ -6,16 +6,17 @@ type ListProps = {
 }
 
 export const ListContainer = styled.main<ListProps>`
-  width: 990px;
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const List = styled.ul<ListProps>`
   display: grid;
   grid-template-columns: repeat(${(props) => props.columns}, 1fr);
-  margin: 100px 0;
   column-gap: 30px;
   row-gap: 30px;
-  height: 100%;
+  margin: 100px 0;
 `

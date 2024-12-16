@@ -8,7 +8,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ capa, titulo, tipo }) => (
   <HeroContainer>
-    <img src={capa} alt="Imagem de fundo" className="hero-image" />
+    <img src={capa} alt="Imagem de fundo" />
     <div>
       <p>{tipo}</p>
       <p className="titulo">{titulo}</p>

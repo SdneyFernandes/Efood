@@ -14,25 +14,27 @@ const Header = ({ variant, onCartClick }: HeaderProps) => {
 
   return (
     <HeaderBar layout={variant === 'home' ? 'vertical' : 'horizontal'}>
-      {variant === 'home' && (
-        <>
-          <Logo src={logo} alt="EFOOD" />
-          <Titulo>
-            Viva experiências gastronômicas no conforto da sua casa
-          </Titulo>
-        </>
-      )}
-      {variant === 'categories' && (
-        <>
-          <Link to="/" className="link">
-            <p>Restaurantes</p>
-          </Link>
-          <Logo src={logo} alt="EFOOD" />
-          <p onClick={onCartClick} style={{ cursor: 'pointer' }}>
-            {cartCount} produto(s) no carrinho
-          </p>
-        </>
-      )}
+      <div className="container">
+        {variant === 'home' && (
+          <>
+            <Logo src={logo} alt="EFOOD" />
+            <Titulo>
+              Viva experiências gastronômicas no conforto da sua casa
+            </Titulo>
+          </>
+        )}
+        {variant === 'categories' && (
+          <>
+            <Link to="/" className="link">
+              <p>Restaurantes</p>
+            </Link>
+            <Logo src={logo} alt="EFOOD" />
+            <p onClick={onCartClick} style={{ cursor: 'pointer' }}>
+              {cartCount} produto(s) no carrinho
+            </p>
+          </>
+        )}
+      </div>
     </HeaderBar>
   )
 }

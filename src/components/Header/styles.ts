@@ -11,12 +11,7 @@ export const HeaderBar = styled.header<HeaderProps>`
   width: 100%;
   height: ${(props) => (props.layout === 'vertical' ? '384px' : '186px')};
   display: flex;
-  flex-direction: ${(props) =>
-    props.layout === 'vertical' ? 'column' : 'row'};
-  align-items: center;
-  justify-content: ${(props) =>
-    props.layout === 'vertical' ? 'center' : 'space-around'};
-  text-align: center;
+  justify-content: center;
 
   p {
     font-size: 18px;
@@ -27,17 +22,26 @@ export const HeaderBar = styled.header<HeaderProps>`
   .link {
     text-decoration: none;
   }
+
+  .container {
+    display: flex;
+    flex-direction: ${(props) =>
+      props.layout === 'vertical' ? 'column' : 'row'};
+    justify-content: space-around;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
 `
 
 export const Titulo = styled.h2`
   color: ${cores.Rosa};
   font-size: 36px;
-  margin-top: 140px;
   width: 539px;
   height: 84px;
 `
 export const Logo = styled.img`
   width: 125px;
   height: 57px;
-  margin-botton: 10px;
 `

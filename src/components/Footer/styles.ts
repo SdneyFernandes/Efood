@@ -3,7 +3,7 @@ import { cores } from '../../styles'
 
 export const FooterContainer = styled.footer`
   background-color: ${cores.Amarelo};
-  width: 1349px;
+  width: 100%;
   height: 298px;
   display: flex;
   flex-direction: column;
