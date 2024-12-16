@@ -10,6 +10,7 @@ export const CartOverlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: flex-end;
+  z-index: 3;
 `
 
 export const CartContainer = styled.div`
