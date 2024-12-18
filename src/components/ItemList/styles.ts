@@ -16,7 +16,7 @@ export const ListContainer = styled.main<ListProps>`
 export const List = styled.ul<ListProps>`
   display: grid;
   grid-template-columns: repeat(${(props) => props.columns}, 1fr);
-  column-gap: 30px;
-  row-gap: 30px;
-  margin: 100px 0;
+  gap: 30px;
+  margin: 100px auto;
+  width: 1024px;
 `

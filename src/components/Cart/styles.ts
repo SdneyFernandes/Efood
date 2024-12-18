@@ -15,15 +15,16 @@ export const CartOverlay = styled.div`
 
 export const CartContainer = styled.div`
   background: ${cores.Rosa};
-  width: 365px;
-  padding: 20px;
+  width: 360px;
+  padding: 8px;
   height: 100%;
   overflow-y: auto;
   box-shadow: -2px 0px 8px rgba(0, 0, 0, 0.2);
+  padding-top: 25px;
 `
 
 export const CartItem = styled.div`
-  width: 320px;
+  width: 344px;
   height: 100px;
   display: flex;
   padding: 10px 10px;
@@ -34,7 +35,8 @@ export const CartItem = styled.div`
   button {
     background: none;
     border: none;
-    margin-left: 165px;
+    margin-top: 20px;
+    margin-left: 225px;
     cursor: pointer;
   }
 
@@ -49,7 +51,7 @@ export const CartImage = styled.img`
 `
 export const CartTitle = styled.h4`
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 900;
 `
 export const CartDescription = styled.p`
   font-size: 14px;
@@ -63,7 +65,7 @@ export const CartTotal = styled.div`
   color: ${cores.Amarelo};
 
   span {
-    margin-left: 170px;
+    margin-left: 205px;
   }
 `
 export const Message = styled.div`
@@ -75,37 +77,36 @@ export const Message = styled.div`
 
 export const ContinueButton = styled.button`
   margin-top: 10px;
-  width: 320px;
-  height: 30px;
-  border-radius: 2px;
+  width: 344px;
+  height: 24px;
 `
 
 export const TitleForm = styled.h3`
   color: ${cores.Amarelo};
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 15px;
+  font-size: 16px;
 `
-export const Form = styled.form`
+export const Form = styled.div`
   color: ${cores.Amarelo};
-  margin-right: 4px;
-  width: 320px;
-  margin-bottom: 30px;
+  width: 344px;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px 0 15px 0;
 
   div {
     display: flex;
     flex-direction: column;
 
     label {
-      margin: 4px 0px;
+      margin: 10px 0px 4px 0px;
     }
 
     input {
-      background-color: ${cores.Amarelo};
-      height: 40px;
+      height: 32px;
       border: none;
-      font-size: 16px;
       padding-left: 6px;
-      font-weight: bold;
+      font-weight: 700;
     }
   }
 
@@ -116,24 +117,18 @@ export const Form = styled.form`
     flex-direction: row;
     justify-content: space-between;
 
-    input {
-      width: 140px;
+    .CEP,
+    .deliveryNumber,
+    .month,
+    .year {
+      width: 155px;
     }
-
     .cardNumber {
-      width: 220px;
+      width: 228px;
     }
 
     .cvv {
-      width: 70px;
-    }
-
-    .month {
-      width: 140px;
-    }
-
-    .year {
-      width: 150px;
+      width: 87px;
     }
   }
 `

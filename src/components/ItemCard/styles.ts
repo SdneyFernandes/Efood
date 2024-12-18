@@ -5,6 +5,10 @@ type ItemProps = {
   variant: 'home' | 'categories'
 }
 
+type TagProps = {
+  size: 'big' | 'small'
+}
+
 export const Card = styled.div<ItemProps>`
   background-color: ${(props) =>
     props.variant === 'home' ? cores.Branco : cores.Rosa};
@@ -70,9 +74,12 @@ export const ItemRating = styled.p`
   font-weight: 900;
   font-size: 18px;
 `
-export const Tag = styled.p`
+export const Tag = styled.p<TagProps>`
   background-color: ${cores.Rosa};
   color: ${cores.RosaClaro};
   font-size: 12px;
-  padding: 8px 16px;
+  width: ${(props) => (props.size === 'big' ? '121px' : '61px')};
+  height: 26px;
+  text-align: center;
+  padding-top: 5px;
 `

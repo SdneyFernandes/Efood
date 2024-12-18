@@ -34,6 +34,7 @@ const Modal = ({ isOpen, onClose, data }: ModalProps) => {
         titulo: data.titulo,
         preco: data.preco,
         capa: data.capa,
+        descricao: data.descricao,
       })
     )
     setNotification(`${data.titulo} foi adicionado ao carrinho!`)

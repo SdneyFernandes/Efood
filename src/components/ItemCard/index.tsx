@@ -44,8 +44,16 @@ const ItemCard = ({
       <ItemImage variant={variant} src={capa} alt={titulo} />
       {variant === 'home' && (
         <ItemInfos>
-          {destacado && <Tag key={destacado}>{destacado}</Tag>}
-          {tipo && <Tag key={tipo}>{tipo}</Tag>}
+          {destacado && (
+            <Tag key={destacado} size="big">
+              {destacado}
+            </Tag>
+          )}
+          {tipo && (
+            <Tag key={tipo} size="small">
+              {tipo}
+            </Tag>
+          )}
         </ItemInfos>
       )}
       <CardContainer variant={variant}>

@@ -7,6 +7,8 @@ export const HeroContainer = styled.div`
   height: 280px;
   overflow: hidden;
   padding-top: 20px;
+  display: flex;
+  justify-content: center;
 
   img {
     width: 100%;
@@ -32,7 +34,7 @@ export const HeroContainer = styled.div`
     position: absolute;
     color: ${cores.Branco};
     font-size: 32px;
-    margin-left: 155px;
+    width: 1024px;
     font-weight: 100;
     z-index: 2;
 

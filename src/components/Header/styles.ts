@@ -27,9 +27,9 @@ export const HeaderBar = styled.header<HeaderProps>`
     display: flex;
     flex-direction: ${(props) =>
       props.layout === 'vertical' ? 'column' : 'row'};
-    justify-content: space-around;
-    max-width: 1200px;
-    width: 100%;
+    justify-content: ${(props) =>
+      props.layout === 'vertical' ? 'space-around' : 'space-between'};
+    width: 1024px;
     align-items: center;
     text-align: center;
   }

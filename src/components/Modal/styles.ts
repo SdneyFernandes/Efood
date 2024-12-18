@@ -45,7 +45,8 @@ export const ModalDescription = styled.div`
   }
 
   button {
-    padding: 10px 20px;
+    width: 218px;
+    height: 24px;
   }
 `
 export const Notification = styled.div`
