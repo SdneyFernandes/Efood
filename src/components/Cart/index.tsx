@@ -88,35 +88,40 @@ const Cart = ({
   if (!isOpen) return null
 
   const validateDelivery = () => {
-    const isValid = Object.values(deliveryData).every(
-      (field) => field.trim() !== ''
-    )
+    const { receiver, address, city, cep, number } = deliveryData
     const cepRegex = /^[0-9]{5}-?[0-9]{3}$/
 
-    if (!isValid) return 'Por favor, preencha todos os campos de entrega!'
-    if (!cepRegex.test(deliveryData.cep))
+    if (!receiver || !address || !city || !cep || !number) {
+      return 'Por favor, preencha todos os campos obrigatórios!'
+    }
+    if (!cepRegex.test(cep)) {
       return 'Por favor, insira um CEP válido (ex: 12345-678).'
+    }
     return null
   }
 
   const validatePayment = () => {
-    const isValid = Object.values(paymentData).every(
-      (field) => field.trim() !== ''
-    )
+    const { cardName, cardNumber, cvv, expiryMonth, expiryYear } = paymentData
     const cardNumberRegex = /^[0-9]{16}$/
     const cvvRegex = /^[0-9]{3}$/
     const expiryMonthRegex = /^(0[1-9]|1[0-2])$/
     const expiryYearRegex = /^[0-9]{4}$/
 
-    if (!isValid) return 'Por favor, preencha todos os campos de pagamento!'
-    if (!cardNumberRegex.test(paymentData.cardNumber))
+    if (!cardName || !cardNumber || !cvv || !expiryMonth || !expiryYear) {
+      return 'Por favor, preencha todos os campos de pagamento!'
+    }
+    if (!cardNumberRegex.test(cardNumber)) {
       return 'Por favor, insira um número de cartão válido (16 dígitos).'
-    if (!cvvRegex.test(paymentData.cvv))
+    }
+    if (!cvvRegex.test(cvv)) {
       return 'Por favor, insira um CVV válido (3 dígitos).'
-    if (!expiryMonthRegex.test(paymentData.expiryMonth))
+    }
+    if (!expiryMonthRegex.test(expiryMonth)) {
       return 'Por favor, insira um mês de vencimento válido (01-12).'
-    if (!expiryYearRegex.test(paymentData.expiryYear))
+    }
+    if (!expiryYearRegex.test(expiryYear)) {
       return 'Por favor, insira um ano de vencimento válido (ex: 2023).'
+    }
     return null
   }
 
@@ -175,7 +180,7 @@ const Cart = ({
       if (!response.ok) throw new Error('Erro ao processar o pedido')
 
       const data = await response.json()
-      setOrderID(data.orderID)
+      setOrderID(data.orderId)
       setStep('confirmation')
       setMessage(null)
     } catch (error) {
@@ -410,24 +415,49 @@ const Cart = ({
         {step === 'confirmation' && (
           <>
             {orderID ? (
-              <>
-                <h3>Pedido Realizado - {orderID}</h3>
-                <p>Destinatário: {deliveryData.receiver}</p>
+              <Form>
+                <TitleForm>Pedido Realizado - {orderID}</TitleForm>
                 <p>
-                  Endereço: {deliveryData.address}, {deliveryData.city},{' '}
-                  {deliveryData.cep}
+                  Destinatário: <span> {deliveryData.receiver}</span>
                 </p>
-                <p>Total: R$ {total.toFixed(2)}</p>
+                <p>
+                  Endereço:{' '}
+                  <span>
+                    {deliveryData.address}, {deliveryData.city},{' '}
+                    {deliveryData.cep}
+                  </span>
+                </p>
+                <p>
+                  Total:
+                  <span> R$ {total.toFixed(2)}</span>
+                </p>
+                <br />
                 <p>
                   Estamos felizes em informar que seu pedido já está em processo
                   de preparação e, em breve, será entregue no endereço
-                  fornecido. Lembre-se da importância de higienizar as mãos após
-                  o recebimento do pedido, garantindo assim sua segurança e
-                  bem-estar durante a refeição. Esperamos que desfrute de uma
-                  deliciosa e agradável experiência gastronômica. Bom apetite!
+                  fornecido.
                 </p>
-                <button onClick={onClose}>Concluir</button>
-              </>
+                <br />
+                <p>
+                  Gostaríamos de ressaltar que nossos entregadores não estão
+                  autorizados a realizar cobranças extras.
+                </p>
+                <br />
+                <p>
+                  Lembre-se da importância de higienizar as mãos após o
+                  recebimento do pedido, garantindo assim sua segurança e
+                  bem-estar durante a refeição.
+                </p>
+                <br />
+                <p>
+                  Esperamos que desfrute de uma deliciosa e agradável
+                  experiência gastronômica. Bom apetite!
+                </p>
+                <br />
+                <ContinueButton className="btn" onClick={onClose}>
+                  Concluir
+                </ContinueButton>
+              </Form>
             ) : (
               <>
                 <Message>

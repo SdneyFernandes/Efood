@@ -131,4 +131,8 @@ export const Form = styled.div`
       width: 87px;
     }
   }
+
+  span {
+    color: black;
+  }
 `
