@@ -44,6 +44,11 @@ const cartSlice = createSlice({
       state.total = state.items.reduce((acc, item) => acc + item.preco, 0)
       saveCartStateToLocalStorage(state)
     },
+    clearCart: (state) => {
+      state.items = []
+      state.total = 0
+      saveCartStateToLocalStorage(state)
+    },
   },
 })
 
@@ -51,5 +56,6 @@ const saveCartStateToLocalStorage = (state: CartState) => {
   localStorage.setItem('cartState', JSON.stringify(state))
 }
 
-export const { addItem, removeItem, setCartItems } = cartSlice.actions
+export const { addItem, removeItem, setCartItems, clearCart } =
+  cartSlice.actions
 export default cartSlice.reducer

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import InputMask from 'react-input-mask'
 import { RootState } from '../../store'
-import { removeItem, setCartItems } from '../../cartSlice'
+import { removeItem, setCartItems, clearCart } from '../../cartSlice'
 import {
   CartContainer,
   CartDescription,
@@ -25,6 +27,7 @@ const Cart = ({
   isOpen: boolean
   onClose: () => void
 }) => {
+  const navigate = useNavigate()
   const [step, setStep] = useState<
     'cart' | 'delivery' | 'payment' | 'confirmation'
   >('cart')
@@ -120,7 +123,7 @@ const Cart = ({
       return 'Por favor, insira um mês de vencimento válido (01-12).'
     }
     if (!expiryYearRegex.test(expiryYear)) {
-      return 'Por favor, insira um ano de vencimento válido (ex: 2023).'
+      return 'Por favor, insira um ano de vencimento válido (ex: 2025).'
     }
     return null
   }
@@ -186,6 +189,11 @@ const Cart = ({
     } catch (error) {
       setMessage('Ocorreu um erro ao processar o pedido. Tente novamente!')
     }
+  }
+
+  const handleOrderComplete = () => {
+    dispatch(clearCart())
+    navigate('/')
   }
 
   return (
@@ -276,8 +284,8 @@ const Cart = ({
               <div className="deliveryCEP">
                 <div>
                   <label htmlFor="CEP">CEP</label>
-                  <input
-                    type="text"
+                  <InputMask
+                    mask="99999-999"
                     name="CEP"
                     value={deliveryData.cep}
                     onChange={(e) =>
@@ -288,7 +296,7 @@ const Cart = ({
                 <div>
                   <label htmlFor="number">Número</label>
                   <input
-                    type="text"
+                    type="number"
                     name="number"
                     value={deliveryData.number}
                     onChange={(e) =>
@@ -344,9 +352,9 @@ const Cart = ({
               <div className="CartNumber">
                 <div>
                   <label htmlFor="cardNumber">Número do cartão</label>
-                  <input
+                  <InputMask
                     className="cardNumber"
-                    type="text"
+                    mask="9999999999999999"
                     name="number"
                     value={paymentData.cardNumber}
                     onChange={(e) =>
@@ -359,9 +367,9 @@ const Cart = ({
                 </div>
                 <div>
                   <label htmlFor="cvv">CVV</label>
-                  <input
+                  <InputMask
                     className="cvv"
-                    type="text"
+                    mask="999"
                     name="cvv"
                     value={paymentData.cvv}
                     onChange={(e) =>
@@ -373,9 +381,9 @@ const Cart = ({
               <div className="expiryMonth">
                 <div>
                   <label htmlFor="expiryMonth">Mês de vencimento</label>
-                  <input
+                  <InputMask
                     className="month"
-                    type="text"
+                    mask="99"
                     name="expiryMonth"
                     value={paymentData.expiryMonth}
                     onChange={(e) =>
@@ -388,9 +396,9 @@ const Cart = ({
                 </div>
                 <div>
                   <label htmlFor="expiryYear">Ano de vencimento</label>
-                  <input
+                  <InputMask
                     className="year"
-                    type="text"
+                    mask="9999"
                     name="expiryYear"
                     value={paymentData.expiryYear}
                     onChange={(e) =>
@@ -413,62 +421,47 @@ const Cart = ({
         )}
 
         {step === 'confirmation' && (
-          <>
-            {orderID ? (
-              <Form>
-                <TitleForm>Pedido Realizado - {orderID}</TitleForm>
-                <p>
-                  Destinatário: <span> {deliveryData.receiver}</span>
-                </p>
-                <p>
-                  Endereço:{' '}
-                  <span>
-                    {deliveryData.address}, {deliveryData.city},{' '}
-                    {deliveryData.cep}
-                  </span>
-                </p>
-                <p>
-                  Total:
-                  <span> R$ {total.toFixed(2)}</span>
-                </p>
-                <br />
-                <p>
-                  Estamos felizes em informar que seu pedido já está em processo
-                  de preparação e, em breve, será entregue no endereço
-                  fornecido.
-                </p>
-                <br />
-                <p>
-                  Gostaríamos de ressaltar que nossos entregadores não estão
-                  autorizados a realizar cobranças extras.
-                </p>
-                <br />
-                <p>
-                  Lembre-se da importância de higienizar as mãos após o
-                  recebimento do pedido, garantindo assim sua segurança e
-                  bem-estar durante a refeição.
-                </p>
-                <br />
-                <p>
-                  Esperamos que desfrute de uma deliciosa e agradável
-                  experiência gastronômica. Bom apetite!
-                </p>
-                <br />
-                <ContinueButton className="btn" onClick={onClose}>
-                  Concluir
-                </ContinueButton>
-              </Form>
-            ) : (
-              <>
-                <Message>
-                  Erro ao carregar os detalhes do pedido. Tente novamente.
-                </Message>
-                <ContinueButton className="btn" onClick={() => setStep('cart')}>
-                  Sair
-                </ContinueButton>
-              </>
-            )}
-          </>
+          <Form>
+            <TitleForm>Pedido Realizado - {orderID}</TitleForm>
+            <p>
+              Destinatário: <span> {deliveryData.receiver}</span>
+            </p>
+            <p>
+              Endereço:{' '}
+              <span>
+                {deliveryData.address}, {deliveryData.city}, {deliveryData.cep}
+              </span>
+            </p>
+            <p>
+              Total:
+              <span> R$ {total.toFixed(2)}</span>
+            </p>
+            <br />
+            <p>
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.
+            </p>
+            <br />
+            <p>
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras.
+            </p>
+            <br />
+            <p>
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição.
+            </p>
+            <br />
+            <p>
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </p>
+            <br />
+            <ContinueButton className="btn" onClick={handleOrderComplete}>
+              Concluir
+            </ContinueButton>
+          </Form>
         )}
       </CartContainer>
     </CartOverlay>
